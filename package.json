@@ -1,0 +1,25 @@
+{
+  "name": "rttp",
+  "version": "0.0.1",
+  "description": "Tiny and simple lib for rest http requests",
+  "main": "./rttp.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "github.com/imbolc/rttp"
+  },
+  "keywords": [
+    "rest",
+    "ajax",
+    "request",
+    "xhr"
+  ],
+  "author": "Imbolc <imbolc@imbolc.name>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/imbolc/rttp/issues"
+  },
+  "homepage": "https://github.com/imbolc/rttp"
+}

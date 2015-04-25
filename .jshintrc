@@ -1,0 +1,21 @@
+{
+    "node": true,
+    "browser": true,
+    "devel": true,
+
+    "bitwise": true,
+    "curly": true,
+    "eqeqeq": true,
+    "indent": 4,
+    "noarg": true,
+    "quotmark": "single",
+    "undef": true,
+    "unused": true,
+    "strict": true,
+
+    "globals": {
+        "define": false,
+        "ActiveXObject": true,
+        "rttp": false
+    }
+}
