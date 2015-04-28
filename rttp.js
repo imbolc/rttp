@@ -21,8 +21,30 @@
             } catch (e) {
                 return xhr.responseText;
             }
+        },
+        dataDumper: function (data) {
+            return JSON.stringify(data);
         }
     };
+
+    function setHeader(headers, key, value) {
+        if (typeof(value) === 'function') {
+            value = value();
+        }
+        if (value === null) {
+            delete headers[key];
+        } else {
+            headers[key] = value;
+        }
+    }
+
+    function updateHeaders(headers, updates) {
+        headers = JSON.parse(JSON.stringify(headers));
+        for(var k in updates) {
+            setHeader(headers, k, updates[k]);
+        }
+        return headers;
+    }
 
     function rttp(method, url, data, cfg) {
         cfg = cfg || {};
@@ -32,6 +54,7 @@
 
             headers = updateHeaders(d.headers, cfg.headers || {}),
             parse = cfg.dataParser || d.dataParser,
+            dump = cfg.dataDumper || d.dataDumper,
 
             XHR = root.XMLHttpRequest || ActiveXObject,
             xhr = new XHR('MSXML2.XMLHTTP.3.0');
@@ -40,7 +63,7 @@
         for (k in headers) {
             xhr.setRequestHeader(k, headers[k]);
         }
-        xhr.send(data);
+        xhr.send(dump(data));
 
         xhr.onreadystatechange = function () {
             if (xhr.readyState === 4) {
@@ -70,28 +93,8 @@
     rttp.setup = function (cfg) {
         d.headers = updateHeaders(d.headers, cfg.headers || {});
         d.dataParser = cfg.dataParser || d.dataParser;
+        d.dataDumper = cfg.dataDumper || d.dataDumper;
     };
-
-    function setHeader(headers, key, value) {
-        if (typeof(value) === 'function') {
-            value = value();
-        }
-        if (value === null) {
-            delete headers[key];
-        } else {
-            headers[key] = value;
-        }
-    }
-
-    function updateHeaders(headers, updates) {
-        headers = JSON.parse(JSON.stringify(headers));
-        for(var k in updates) {
-            setHeader(headers, k, updates[k]);
-        }
-        return headers;
-    }
-
-
     rttp.get = function (url, cfg) {
         return rttp('GET', url, null, cfg);
     };
