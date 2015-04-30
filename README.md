@@ -34,6 +34,11 @@ Change defaults
 
             // remove default Content-Type header
             'Content-Type': null
+        },
+
+        // set default error callback
+        errorCallback: function (data, xhr) {
+            alert(xhr.status + ': ' + xhr.statusText);
         }
 
         // change default data parser

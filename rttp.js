@@ -24,7 +24,8 @@
         },
         dataDumper: function (data) {
             return JSON.stringify(data);
-        }
+        },
+        errorCallback: function() {}
     };
 
     function setHeader(headers, key, value) {
@@ -50,7 +51,7 @@
         cfg = cfg || {};
         var k, cbs,
             success = function () {},
-            error = function () {},
+            error = d.errorCallback,
 
             headers = updateHeaders(d.headers, cfg.headers || {}),
             parse = cfg.dataParser || d.dataParser,
@@ -92,8 +93,9 @@
 
     rttp.setup = function (cfg) {
         d.headers = updateHeaders(d.headers, cfg.headers || {});
-        d.dataParser = cfg.dataParser || d.dataParser;
-        d.dataDumper = cfg.dataDumper || d.dataDumper;
+        ['dataParser', 'dataDumper', 'errorCallback'].forEach(function (param) {
+            d[param] = cfg[param] || d[param];
+        });
     };
     rttp.get = function (url, cfg) {
         return rttp('GET', url, null, cfg);
