@@ -8,6 +8,7 @@ Example
     rttp.get('/url')
         .success(function (data, xhr) { })
         .error(function (data, xhr) { });
+        .finish(function (data, xhr) { });
 
 API
 ---

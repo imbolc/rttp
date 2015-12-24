@@ -52,6 +52,7 @@
         var k, cbs,
             success = function () {},
             error = d.errorCallback,
+            finish = function () {},
 
             headers = updateHeaders(d.headers, cfg.headers || {}),
             parse = cfg.dataParser || d.dataParser,
@@ -67,11 +68,16 @@
         xhr.send(dump(data));
 
         xhr.onreadystatechange = function () {
+            var data;
+
             if (xhr.readyState === 4) {
+                data = parse(xhr);
                 if (xhr.status >= 200 && xhr.status < 300) {
-                    success(parse(xhr), xhr);
+                    success(data, xhr);
+                    finish(data, xhr);
                 } else {
-                    error(parse(xhr), xhr);
+                    error(data, xhr);
+                    finish(data, xhr);
                 }
             }
         };
@@ -83,6 +89,10 @@
             },
             error: function (callback) {
                 error = callback;
+                return cbs;
+            },
+            finish: function (callback) {
+                finish = callback;
                 return cbs;
             }
         };
