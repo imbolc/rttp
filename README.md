@@ -16,6 +16,7 @@ API
     rttp.get(url, config)
     rttp.post(url, data, config)
     rttp.put(url, data, config)
+    rttp.patch(url, data, config)
     rttp.del(url, config)
 
 

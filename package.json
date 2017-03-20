@@ -1,6 +1,6 @@
 {
   "name": "rttp",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Tiny and simple lib for rest http requests",
   "main": "./rttp.js",
   "scripts": {

@@ -116,6 +116,9 @@
     rttp.put = function (url, data, cfg) {
         return rttp('PUT', url, data, cfg);
     };
+    rttp.patch = function (url, data, cfg) {
+        return rttp('PATCH', url, data, cfg);
+    };
     rttp.del = function (url, cfg) {
         return rttp('DELETE', url, null, cfg);
     };
